@@ -134,10 +134,13 @@
     <ClInclude Include="Windows APP.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="buttons.cpp" />
     <ClCompile Include="event.cpp" />
     <ClCompile Include="folder.c" />
     <ClCompile Include="init.cpp" />
     <ClCompile Include="my_str_to_word_array.c" />
+    <ClCompile Include="open_file.cpp" />
+    <ClCompile Include="open_foldr.cpp" />
     <ClCompile Include="Windows APP.cpp" />
   </ItemGroup>
   <ItemGroup>

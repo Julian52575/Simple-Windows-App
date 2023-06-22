@@ -7,7 +7,8 @@
 extern HINSTANCE hInst;                                // current instance
 extern WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 extern WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
-
+extern HWND hWnd;                                      // the Window
+HWND Download_Button;
 
 //
 //  FUNCTION: MyRegisterClass()
@@ -49,16 +50,44 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
     hInst = hInstance; // Store instance handle in our global variable
 
-    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+    hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-    if (!hWnd)
-    {
+    if (!hWnd) {
         return FALSE;
     }
 
+    HWND Download_Button = CreateWindow(
+        L"BUTTON",  // Predefined class; Unicode assumed 
+        L"Download Folder",      // Button text 
+        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON ,  // Styles 
+        300,         // x position 
+        300,         // y position 
+        200,        // Button width
+        40,        // Button height
+        hWnd,     // Parent window
+        (HMENU) 3,       // Function on click.
+        (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE),
+        &download_buttonf );      // Pointer (not) needed.
+    
+    HWND Download_path = CreateWindow(
+        L"EDIT",  // Predefined class; Unicode assumed 
+        L"this is your download path",      // Button text 
+        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+        300,         // x position 
+        340,         // y position 
+        200,        // Button width
+        40,        // Button height
+        hWnd,     // Parent window
+        NULL,       // No special interaction on click.
+        (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE),
+        NULL);      // Pointer not needed.
+
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
+
+    char buffer[999];
+    GetWindowText(Download_path, (LPWSTR) buffer, 999);
 
     return TRUE;
 }

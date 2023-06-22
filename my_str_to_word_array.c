@@ -1,6 +1,4 @@
 
-#include "my.hpp"
-
 unsigned int how_many_c_in_str(char* str, char c)
 {
     int count = 0;
@@ -14,11 +12,11 @@ unsigned int how_many_c_in_str(char* str, char c)
 char** my_str_to_word_array(char* str, char delimiter)
 {
     if (!str)
-        return NULL;
+        return (void *) 0;
     unsigned int nb_delim = how_many_c_in_str(str, ':');
     char** array = malloc(sizeof(char*) * (nb_delim + 2));
     if (!array)
-        return NULL;
+        return (void*) 0;
     int a = -1;
     array[++a] = str;
     for (int s = 0; str[s]; s++) {
@@ -29,6 +27,6 @@ char** my_str_to_word_array(char* str, char delimiter)
             str[s] = '\0';
         }
     }
-    array[++a] = NULL;
+    array[++a] = (void*) 0;
     return array;
 }
